@@ -2,9 +2,9 @@ from os import environ
 import aiohttp
 from pyrogram import Client, filters
 
-API_ID = environ.get('API_ID')
-API_HASH = environ.get('API_HASH')
-BOT_TOKEN = environ.get('BOT_TOKEN')
+API_ID = environ.get('API_ID', "14438288")
+API_HASH = environ.get('API_HASH', "51111ec90615944db5863c0b52e8d29c")
+BOT_TOKEN = environ.get('BOT_TOKEN', "5635471956:AAGY7drOf95812iLUwtv_3MA2i5gJ62QJTE")
 API_KEY = {}
 
 bot = Client('gplink bot',
@@ -26,7 +26,7 @@ async def set_api(bot, message):
     if len(message.command) == 1: 
         await message.reply("Give your API with command!", quote=True) 
         return 
-    API_KEY[str(message.from_user.id)] = m.text
+    API_KEY[str(message.from_user.id)] = message.text
     await message.reply_text("API Set Successfully!", quote=True)
 
 @bot.on_message(filters.regex(r'https?://[^\s]+') & filters.private)
